@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    resetOTP: {
+    otp: {
         type: String,
         default: null,
       }

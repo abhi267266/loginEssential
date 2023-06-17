@@ -20,7 +20,7 @@ router.get('/logout', usersController.destroySession)
 router.get('/resetPassword', resetPasswordController.resetPasswordPage);
 router.post('/sendEmailForAuth', resetPasswordController.sendEmailForAuth);
 router.get('/check', resetPasswordController.checkOTPGet)
-router.post('check', resetPasswordController.checkOTP)
+router.post('/check', resetPasswordController.checkOTP)
 
 //######################################
 

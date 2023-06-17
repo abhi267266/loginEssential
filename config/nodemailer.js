@@ -1,20 +1,56 @@
 const nodemailer = require("nodemailer");
 const ejs = require('ejs');
-const path = require('path')
+const path = require('path');
 
 
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
+// create reusable transporter object using the default SMTP transport
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
     port: 587,
-    secure: false,
     auth: {
-        user: 'alchemy.cn18',
-        pass: 'codingninjas'
+        user: 'armando89@ethereal.email',
+        pass: 'HGwmmbHu8Vpgaheeuf'
     }
-    // kendra.hudson40@ethereal.email
-    // VY9t8eKvx4r4M8VbYQ
 });
 
 
-module.exports = transporter;
+let renderTemplate = (data, relativePath) => {
+    let mailHTML;
+    ejs.renderFile(
+        path.join(__dirname, '../views/mailer/reset/', relativePath),
+        data,
+        function(err, template){
+            if (err) {
+                console.log('Error in rendering template', err);
+                return;
+            }
+            mailHTML = template;
+        }
+    );
+    return mailHTML;
+};
+
+let newOtp = (user) => {
+    let htmlString = renderTemplate({ user }, 'reset_password.ejs');
+
+    let mailOptions = {
+        from: "armando89@ethereal.email",
+        to: user.email,
+        subject: 'Reset Password',
+        html: htmlString
+    };
+
+    transporter.sendMail(mailOptions, function(err, info){
+        if (err) {
+            console.log('Error in sending mail', err);
+            return;
+        }
+        console.log('Message sent', info);
+    });
+};
+
+module.exports = {
+    transporter,
+    renderTemplate,
+    newOtp
+};
