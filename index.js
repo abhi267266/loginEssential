@@ -10,7 +10,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-// const passportGoogle = require('./config/passport-google-oauth2-strategy');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
@@ -37,7 +37,7 @@ app.set('views', './views');
 app.use(session({
     name: 'User',
     // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret: process.env['SECRET_KEY'],
     saveUninitialized: false,
     resave: false,
     cookie: {
