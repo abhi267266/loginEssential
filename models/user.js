@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    resetOTP: {
+        type: String,
+        default: null,
+      }
 }, {
     timestamps: true
 });
