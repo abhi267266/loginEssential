@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
 require('dotenv').config();
-const port = proccess.env.PORT;
+const port = process.env.PORT;
 const expressLayouts = require('express-ejs-layouts');
 
 const db = require('./config/mongoose');
@@ -10,13 +10,13 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const passportGoogle = require('./config/passport-google-oauth2-strategy');
+// const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 
-app.use(logger('dev'));
+// app.use(express.logger('dev'));
 
 app.use(express.urlencoded());
 
@@ -35,7 +35,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(session({
-    name: 'AuthSetup',
+    name: 'User',
     // TODO change the secret before deployment in production mode
     secret: 'blahsomething',
     saveUninitialized: false,
@@ -45,8 +45,10 @@ app.use(session({
     },
     store: new MongoStore(
         {
-            mongooseConnection: db,
-            autoRemove: 'disabled'
+            mongoUrl: 'mongodb://localhost/exampleDB', // MongoDB connection URL
+            autoReconnect: true,
+            collection: 'sessions',
+            ttl: 60 * 60 
         
         },
         function(err){

@@ -1,0 +1,30 @@
+#layout-footer {
+    color: white;
+    background: grey;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  #layout-footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  #layout-footer .footer-nav ul {
+    list-style: none;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content {
+    flex: 1 0 auto;
+  }
+  
