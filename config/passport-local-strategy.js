@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 // Use local strategy for users authentication
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const User = require('./user');
 
 // Define the LocalStrategy for users authentication
 passport.use(
@@ -69,7 +69,7 @@ passport.checkAuthentication = function (req, res, next) {
   }
 
   // If the user is not signed in, redirect to the sign-in page
-  return res.redirect('/users/sign-up');
+  return res.redirect('/users/signup');
 };
   
 // Set the authenticated users in locals for views

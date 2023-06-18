@@ -11,7 +11,7 @@ router.get('/profile',passport.checkAuthentication, usersController.profile);
 router.post('/create', usersController.create);
 router.post('/create-session',passport.authenticate(
     'local',
-    {failureRedirect: '/users/sign-up'},
+    {failureRedirect: '/users/signup'},
 ),
 usersController.createSession);
 router.get('/logout', usersController.destroySession)
@@ -19,8 +19,10 @@ router.get('/logout', usersController.destroySession)
 //reset password
 router.get('/resetPassword', resetPasswordController.resetPasswordPage);
 router.post('/sendEmailForAuth', resetPasswordController.sendEmailForAuth);
-router.get('/check', resetPasswordController.checkOTPGet)
-router.post('/check', resetPasswordController.checkOTP)
+router.get('/check', resetPasswordController.checkOTPGet);
+router.post('/check', resetPasswordController.checkOTP);
+router.get('/create-new-password', resetPasswordController.updatePasswordGet);
+router.post('/create-new-password', resetPasswordController.updatePassword)
 
 //######################################
 

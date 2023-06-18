@@ -8,11 +8,10 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'armando89@ethereal.email',
-        pass: 'HGwmmbHu8Vpgaheeuf'
+        user: 'amelia.powlowski@ethereal.email',
+        pass: 'ApYPC7dZ1XHFqC9HU2'
     }
 });
-
 
 let renderTemplate = (data, relativePath) => {
     let mailHTML;
@@ -34,7 +33,7 @@ let newOtp = (user) => {
     let htmlString = renderTemplate({ user }, 'reset_password.ejs');
 
     let mailOptions = {
-        from: "armando89@ethereal.email",
+        from: 'amelia.powlowski@ethereal.email',
         to: user.email,
         subject: 'Reset Password',
         html: htmlString
